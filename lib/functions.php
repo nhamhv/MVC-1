@@ -176,7 +176,6 @@ function urlAnalyze()
 function trimInput($data)
 {
     $data = trim($data);
-    $data = htmlentities($data, ENT_QUOTES);
 
     return $data;
 }

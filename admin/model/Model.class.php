@@ -56,7 +56,7 @@ class Model
             $query = self::actionSelect('where', '*', '');
             foreach ($data as $key => $value) {
                 foreach ($column as $k => $v) {
-                    $query .= $v . " like '%" . $value . "%' or " . $v . " like '%" . $value . "%' or ";
+                    $query .= $v . " like '%" . $value . "' or " . $v . " like '" . $value . "%' or ";
                 }
             }
             $query = rtrim($query, ' or');

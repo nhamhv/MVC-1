@@ -66,7 +66,7 @@
                         <div class="span9">
                             <select name="status">
                             <?php 
-                                if(!isset($user['status'])) {
+                                if(empty($user['status'])) {
                                     $user['status'] = ACTIVE_VALUE;
                                 }
                                 if($user['status'] == ACTIVE_VALUE) {

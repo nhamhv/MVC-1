@@ -119,11 +119,7 @@ class UserController extends BaseController
     private function dataInputFormat($itemPost = array(), &$dataInput = array(), &$fileName, $data)
     {
         $dataInput['username'] = trimInput(getValue($itemPost[0]));
-
-        if (empty($data['user']['pass']) || getValue($itemPost[1]) != $data['user']['pass']) {
-            $dataInput['pass'] = md5(getValue($itemPost[1]));
-        }
-
+        $dataInput['pass'] = md5(getValue($itemPost[1]));
         $dataInput['user_email'] = trimInput(getValue($itemPost[2]));
         $dataInput['status'] = getValue($itemPost[3]);
         $dataInput['user_time_updated'] = date('Y-m-d h:i:s');

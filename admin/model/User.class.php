@@ -19,13 +19,13 @@ class User extends Model
             ':pass' => md5($password)
         );
 
-        $query = "select count(user_id) from user where username = :username and pass = :pass and privilege = 1 and status = 1";
+        $query = "select user_id, user_img from user where username = :username and pass = :pass and privilege = 1 and status = 1";
         $db = Database::getInstance();
         $s = $db->prepare($query);
         $s->execute($condition);
-        $result = $s->fetchColumn();
-        if ($result > 0) {
-            return true;
+        $result = $s->fetch(PDO::FETCH_ASSOC);
+        if (count($result) > 0) {
+            return $result;
         } else {
             return false;
         }

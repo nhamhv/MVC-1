@@ -84,6 +84,7 @@ class LoginController extends BaseController
 
                 if ($result) {
                     $_SESSION['username'] = $username;
+                    $_SESSION['user_img'] = $result['user_img'];
                     $_SESSION['log'] = true;
 
                     if (isset($_POST['remember'])) {                                //If click remember checkbox

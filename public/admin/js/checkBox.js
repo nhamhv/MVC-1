@@ -6,7 +6,7 @@ $(document).ready(function() {
             });
         } else {
             $('.case').each(function() {
-                this.checked = false;
+                this.checked = true;
             });
         }
     });
