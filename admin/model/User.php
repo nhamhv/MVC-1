@@ -12,7 +12,7 @@ class User extends Model
     /**
      * Login process
      */
-    public static function login_process($username, $password)
+    public static function loginProcess($username, $password)
     {
         $condition = array(
             ':username' => $username,
@@ -24,6 +24,7 @@ class User extends Model
         $s = $db->prepare($query);
         $s->execute($condition);
         $result = $s->fetch(PDO::FETCH_ASSOC);
+
         if (count($result) > 0) {
             return $result;
         } else {
@@ -34,7 +35,7 @@ class User extends Model
     /**
      * Get all record user
      */
-    public static function get_list($limit)
+    public static function getList($limit)
     {
         return self::getAllRecord($limit);
     }
@@ -79,7 +80,7 @@ class User extends Model
     /**
      * Count record by condition
      */
-    public static function count_colum($column, $value)
+    public static function countColumn($column, $value)
     {
         return self::countRowByColumn($column, $value);
     }
@@ -95,7 +96,7 @@ class User extends Model
     /**
      * Update active record
      */
-    public static function update_active($user_id, $value)
+    public static function updateActive($user_id, $value)
     {
         $data = array(
             'status' => $value,
@@ -113,7 +114,7 @@ class User extends Model
     /**
      * Sort record
      */
-    public static function sort_item($item, $typesort, $limit)
+    public static function sortItem($item, $typesort, $limit)
     {
         return self::sort($item, $typesort, $limit);
     }
@@ -121,13 +122,13 @@ class User extends Model
     /**
      * Search and search
      */
-    public static function sort_search($string, $item = null, $typesort = null, $limit = null)
+    public static function sortSearch($string, $item = null, $typesort = null, $limit = null)
     {
         $column = array(
             'username' => 'username',
             'user_id' => 'user_id'
         );
 
-        return self::search_sort($item, $typesort, $limit, $string, $column);
+        return self::searchSort($item, $typesort, $limit, $string, $column);
     }
 }
