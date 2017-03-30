@@ -17,8 +17,9 @@ class Validation
         $check = true;
 
         foreach ($rule as $value) {
-            if (preg_match('/^[a-z_]+$/', $value)) {                                //if string only contain a-z characters
-                if (($this->$value($field)) == false) {
+            if (preg_match('/^[a-zA-Z_]+$/', $value)) { //if string only contain a-z characters
+                $methodName = $this->dashesToCamelCase($value);
+                if (($this->$methodName($field)) == false) {
                     $message = sprintf($this->message[$value], $label);
                     $check = false;
                     break;
@@ -92,7 +93,7 @@ class Validation
     /**
      * Check field is email
      */
-    private function valid_email($str)
+    private function validEmail($str)
     {
         return (!filter_var($str, FILTER_VALIDATE_EMAIL)) ? FALSE : TRUE;
     }
@@ -100,7 +101,7 @@ class Validation
     /**
      * Check field is number natural
      */
-    private function valid_number_natural($str)
+    private function validNumberNatural($str)
     {
         if (!preg_match('/^[0-9]+$/', $str)) {
             return false;
@@ -117,7 +118,7 @@ class Validation
     /**
      * Check field is more than some of charater
      */
-    private function min_length($str, $val)
+    private function minLength($str, $val)
     {
         return (strlen($str) < $val) ? FALSE : TRUE;
     }
@@ -125,7 +126,7 @@ class Validation
     /**
      * Check field is less than some of charater
      */
-    private function max_length($str, $val)
+    private function maxLength($str, $val)
     {
         return (strlen($str) > $val) ? FALSE : TRUE;
     }
@@ -133,7 +134,7 @@ class Validation
     /**
      * Check field only contain a-z character
      */
-    private function anpha($str)
+    private function alpha($str)
     {
         return (preg_match('/^[a-zA-z]+$/', $str));
     }
@@ -142,8 +143,20 @@ class Validation
     /**
      * Check field only contain a-z, 0-9 character
      */
-    private function anpha_numeric($str)
+    private function alphaNumeric($str)
     {
         return (preg_match('/^[a-zA-z0-9]+$/', $str));
+    }
+
+    private function dashesToCamelCase($string, $capitalizeFirstCharacter = false)
+    {
+
+        $str = str_replace(['-', '_'], '', ucwords($string, '-_'));
+
+        if (!$capitalizeFirstCharacter) {
+            $str = lcfirst($str);
+        }
+
+        return $str;
     }
 }

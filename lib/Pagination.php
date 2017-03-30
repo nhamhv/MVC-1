@@ -51,7 +51,7 @@ class Pagination
     {
         $this->_instance = $instance;
         $this->_perPage = $perPage;
-        $this->set_instance();
+        $this->setInstance();
     }
 
     /**
@@ -60,7 +60,7 @@ class Pagination
      * creates the starting point for limiting the dataset
      * @return numeric
      */
-    public function get_start()
+    public function getStart()
     {
         return ($this->_page * $this->_perPage) - $this->_perPage;
     }
@@ -72,7 +72,7 @@ class Pagination
      *
      * @var numeric
      */
-    private function set_instance()
+    private function setInstance()
     {
         $this->_page = (int)(!isset($_GET[$this->_instance]) ? 1 : $_GET[$this->_instance]);
         $this->_page = ($this->_page == 0 ? 1 : $this->_page);
@@ -85,7 +85,7 @@ class Pagination
      *
      * @var numeric
      */
-    public function set_total($_totalRows)
+    public function setTotal($_totalRows)
     {
         $this->_totalRows = $_totalRows;
     }
@@ -97,9 +97,9 @@ class Pagination
      *
      * @return string
      */
-    public function get_limit()
+    public function getLimit()
     {
-        return "LIMIT " . $this->get_start() . ",$this->_perPage";
+        return "LIMIT " . $this->getStart() . ",$this->_perPage";
     }
 
     /**
@@ -111,7 +111,7 @@ class Pagination
      * @var sting $ext optionally pass in extra parameters to the GET
      * @return string returns the html menu
      */
-    public function page_links($path = '?', $ext = null)
+    public function pageLinks($path = '?', $ext = null)
     {
         $adjacents = "2";
         $prev = $this->_page - 1;

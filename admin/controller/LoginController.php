@@ -80,7 +80,7 @@ class LoginController extends BaseController
                 $username = getValue('username');
                 $password = getValue('pass');
 
-                $result = User::login_process($username, $password);                //Login handle
+                $result = User::loginProcess($username, $password);                //Login handle
 
                 if ($result) {
                     $_SESSION['username'] = $username;

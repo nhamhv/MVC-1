@@ -47,7 +47,7 @@ class Model
     /**
      * Search and sort
      */
-    protected static function search_sort($item, $typesort, $limit, $string = null, $column = array())
+    protected static function searchSort($item, $typesort, $limit, $string = null, $column = array())
     {
         if (!empty($string)) {
             $data = array();

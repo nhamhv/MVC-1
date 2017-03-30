@@ -116,11 +116,11 @@ class BaseController
     {
         $model = $this->model;
         $pages = new Pagination(PER_PAGE, INSTANT);
-        $pages->set_total($model::count());
+        $pages->setTotal($model::count());
 
         $data = array(
-            'lists' => $model::get_list($pages->get_limit()),
-            'page_links' => $pages->page_links(),
+            'lists' => $model::getList($pages->getLimit()),
+            'page_links' => $pages->pageLinks(),
             'count' => $model::count(),
             'valueSearch' => ''
         );
@@ -164,19 +164,19 @@ class BaseController
         if (!empty(getValue('search')) && getValue('search') != '') {
             $string = trimInput(getValue('search'));
             $string = preg_replace('/\s\s+/', ' ', $string);
-            $totalRecord = $model::sort_search($string, $item, $order)['count'];
-            $pages->set_total($totalRecord);
+            $totalRecord = $model::sortSearch($string, $item, $order)['count'];
+            $pages->setTotal($totalRecord);
             $data = array(
-                'lists' => $model::sort_search($string, $item, $order, $pages->get_limit())['result'],
-                'page_links' => $pages->page_links($path = "?search=" . $string . "&field=" . $item . "&type=" . $order . "&", $ext = ''),
+                'lists' => $model::sortSearch($string, $item, $order, $pages->getLimit())['result'],
+                'page_links' => $pages->pageLinks($path = "?search=" . $string . "&field=" . $item . "&type=" . $order . "&", $ext = ''),
                 'count' => $totalRecord,
                 'valueSearch' => $string
             );
         } else {
-            $pages->set_total($model::count());
+            $pages->setTotal($model::count());
             $data = array(
-                'lists' => $model::sort_item($item, $order, $pages->get_limit()),
-                'page_links' => $pages->page_links($path = "?field=" . $item . "&type=" . $order . "&", $ext = ''),
+                'lists' => $model::sortItem($item, $order, $pages->getLimit()),
+                'page_links' => $pages->pageLinks($path = "?field=" . $item . "&type=" . $order . "&", $ext = ''),
                 'count' => $model::count(),
                 'valueSearch' => ''
             );
@@ -198,20 +198,20 @@ class BaseController
     protected function activeItem()
     {
         if (!empty(getValue('btn-ac'))) {
-            $this->update_active(ACTIVE_VALUE);
+            $this->updateActive(ACTIVE_VALUE);
         }
 
         if (!empty(getValue('btn-dac'))) {
-            $this->update_active(DEACTIVE_VALUE);
+            $this->updateActive(DEACTIVE_VALUE);
         }
     }
 
-    private function update_active($status)
+    private function updateActive($status)
     {
         $model = $this->model;
         if (!empty(getValue('checkbox'))) {
             foreach ((getValue('checkbox')) as $check) {
-                $model::update_active($check, $status);
+                $model::updateActive($check, $status);
             }
         } else {
             $_SESSION['checkBox'] = "Please tick in check box.";

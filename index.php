@@ -20,7 +20,7 @@ $self = $_SERVER['PHP_SELF'];
 $arrayUrl = array();
 $arrayUrl = explode('/', $self);
 $base_url = "http://" . $host;
-define('BASE_URL', $base_url);
+define('BASE_URL', 'http://localhost/mvc');
 
 /*
  * Function load controller and action
@@ -78,8 +78,8 @@ function __autoload($className)
     );
 
     foreach ($paths as $path) {
-        if (file_exists($path . $className . ".class.php")) {
-            require_once($path . $className . ".class.php");
+        if (file_exists($path . $className . ".php")) {
+            require_once($path . $className . ".php");
             break;
         }
     }
